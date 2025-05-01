@@ -54,6 +54,12 @@ module Chatwoot
     config.generators.javascripts = false
     config.generators.stylesheets = false
 
+	# Allow iframe embedding from your trusted domain
+    config.action_dispatch.default_headers.merge!({
+      'X-Frame-Options' => 'ALLOW-FROM https://api.ubi.services',
+      'Content-Security-Policy' => "frame-ancestors https://api.ubi.services"
+    })
+
     # Custom chatwoot configurations
     config.x = config_for(:app).with_indifferent_access
 
